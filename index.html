@@ -100,13 +100,8 @@ to{opacity:1}
 </head>
 
 <body>
-    <div id="startScreen">
-    <button id="startBtn">
-        ❤️ Começar Nossa História ❤️
-    </button>
-</div>
 
-<audio id="music" loop preload="auto">
+<audio id="music" loop>
 <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
@@ -268,11 +263,6 @@ const stories = document.querySelectorAll('.story');
 const bar = document.getElementById('bar');
 const music = document.getElementById('music');
 
-let current = 0;
-startBtn.addEventListener("click", () => {
-    music.play();
-    startScreen.style.display = "none";
-});
 let current=0;
 
 document.body.addEventListener('click',()=>{
