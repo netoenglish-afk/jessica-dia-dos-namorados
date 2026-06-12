@@ -14,37 +14,12 @@ box-sizing:border-box;
 }
 
 body{
-font-family:'Segoe UI', sans-serif;
+font-family: 'Segoe UI', sans-serif;
 overflow:hidden;
 background:#000;
 color:#fff;
 }
 
-/* START */
-#startScreen{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:#000;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:99999;
-}
-
-#startBtn{
-background:#ff4d88;
-color:#fff;
-border:none;
-padding:18px 30px;
-font-size:1.2rem;
-border-radius:40px;
-cursor:pointer;
-}
-
-/* STORIES */
 .story{
 position:absolute;
 top:0;
@@ -52,10 +27,7 @@ left:0;
 width:100%;
 height:100vh;
 background-size:cover;
-background-repeat:no-repeat;
 background-position:center;
-background-color:#000;
-
 display:none;
 justify-content:center;
 align-items:center;
@@ -65,26 +37,32 @@ padding:20px;
 
 .story.active{
 display:flex;
-animation:fade 0.6s ease;
+animation:fade 1s ease;
 }
 
-/* OVERLAY */
 .overlay{
-position:absolute;
-bottom:0;
-left:0;
-width:100%;
-background:linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,.5), transparent);
-padding:20px;
-text-align:center;
+background:rgba(0,0,0,.55);
+padding:30px;
+border-radius:20px;
+max-width:800px;
+backdrop-filter:blur(6px);
 }
 
-/* TEXT */
-h1{font-size:1.8rem;margin-bottom:10px;}
-h2{font-size:1.5rem;margin-bottom:10px;}
-p{font-size:0.95rem;line-height:1.4;margin-bottom:4px;}
+h1{
+font-size:2.4rem;
+margin-bottom:20px;
+}
 
-/* PROGRESS */
+h2{
+font-size:2rem;
+margin-bottom:20px;
+}
+
+p{
+font-size:1.2rem;
+line-height:1.8;
+}
+
 .progress{
 position:fixed;
 top:0;
@@ -97,11 +75,10 @@ z-index:9999;
 
 .bar{
 height:100%;
-width:0%;
+width:0;
 background:#ff4d88;
 }
 
-/* CONTADOR */
 #contador{
 position:fixed;
 top:15px;
@@ -113,7 +90,6 @@ font-size:14px;
 z-index:9999;
 }
 
-/* ANIMATION */
 @keyframes fade{
 from{opacity:0}
 to{opacity:1}
@@ -122,10 +98,6 @@ to{opacity:1}
 </head>
 
 <body>
-
-<div id="startScreen">
-<button id="startBtn">❤️ Começar Nossa História ❤️</button>
-</div>
 
 <audio id="music" loop>
 <source src="musica.mp3" type="audio/mpeg">
@@ -137,239 +109,208 @@ to{opacity:1}
 <div class="bar" id="bar"></div>
 </div>
 
-<!-- STORIES -->
 <div class="story active" style="background-image:url('capa.jpg')">
 <div class="overlay">
 <h1>❤️ Nossa História ❤️</h1>
-<p>Toque para começar</p>
+<p>Tudo começou com nós dois.</p>
+<p>Antes da família.</p>
+<p>Antes do casamento.</p>
+<p>Antes de todas as histórias que ainda viveríamos.</p>
+<p><strong>Toque na tela para começar.</strong></p>
 </div>
 </div>
 
 <div class="story" style="background-image:url('primeira-foto.jpeg')">
 <div class="overlay">
 <h2>Natal, 2013</h2>
-<p>O começo de tudo.</p>
+<p>Quando essa foto foi tirada eu não fazia ideia do que viveríamos juntos.</p>
+<p>Mas olhando para ela hoje...</p>
+<p>Parece que meu coração já sabia.</p>
 </div>
 </div>
 
 <div class="story" style="background-image:url('praia.jpg')">
 <div class="overlay">
-<h2>Meu lugar favorito</h2>
-<p>Você ao meu lado.</p>
+<h2>Meu Lugar Favorito</h2>
+<p>Entre tantos lugares...</p>
+<p>Entre tantas experiências...</p>
+<p>Meu lugar favorito sempre foi ao seu lado.</p>
 </div>
 </div>
 
 <div class="story" style="background-image:url('casamento.jpg')">
 <div class="overlay">
-<h2>21/12/2015</h2>
-<p>Nosso sim para a vida inteira.</p>
+<h2>21 de Dezembro de 2015</h2>
+<p>O dia em que prometemos caminhar juntos.</p>
+<p>E eu escolheria você novamente.</p>
+<p>Mil vezes.</p>
+</div>
+</div>
+
+<div class="story" style="background-image:url('IMG_0203.JPEG')">
+<div class="overlay">
+<h2>Nossa Jornada</h2>
+<p>Cada foto guarda uma lembrança.</p>
+<p>Cada lembrança guarda um pedaço da nossa história.</p>
+</div>
+</div>
+
+<div class="story" style="background-image:url('IMG_0209.JPEG')">
+<div class="overlay">
+<h2>Crescendo Juntos</h2>
+<p>Vivemos sonhos.</p>
+<p>Superamos desafios.</p>
+<p>Construímos uma vida.</p>
 </div>
 </div>
 
 <div class="story" style="background-image:url('theo.jpg')">
 <div class="overlay">
-<h2>Nosso maior presente ❤️</h2>
-<p>Théo mudou tudo.</p>
+<h2>Nosso Maior Presente ❤️</h2>
+<p>O Théo mudou tudo.</p>
+<p>E trouxe um amor ainda maior para nossas vidas.</p>
 </div>
 </div>
 
-<div class="story" style="background-image:url('familia.jpg')">
+<div class="story" style="background-image:url('theo.jpg')">
 <div class="overlay">
-<h2>Nossa família</h2>
-<p>Nosso maior orgulho.</p>
+<h2>Nossa Maior Prova</h2>
+<p>Os 15 dias na UTI Neonatal foram os mais difíceis das nossas vidas.</p>
+<p>Mas enfrentamos tudo juntos.</p>
+<p>Um segurando a mão do outro.</p>
+</div>
+</div>
+
+<div class="story" style="background-image:url('Foto familia.HEIC')">
+<div class="overlay">
+<h2>Nossa Maior Vitória</h2>
+<p>Hoje olhamos para o Théo correndo.</p>
+<p>Brincando.</p>
+<p>Sorrindo.</p>
+<p>E lembramos de cada oração.</p>
 </div>
 </div>
 
 <div class="story" style="background-image:url('final.jpeg')">
 <div class="overlay">
-<h1>Jessica ❤️</h1>
-<p>Eu escolheria tudo de novo.</p>
-<p>Você. Eu. O Théo.</p>
-<p>Feliz Dia dos Namorados ❤️</p>
+<h2>Jessica ❤️</h2>
+
+<p>Se alguém me mostrasse aquela primeira foto em 2013 e me dissesse tudo o que viveríamos...</p>
+
+<p>Eu aceitaria cada segundo.</p>
+
+<p>As alegrias.</p>
+
+<p>Os desafios.</p>
+
+<p>Os medos.</p>
+
+<p>As vitórias.</p>
+
+<p>Porque cada passo me trouxe até você.</p>
+
+<p>E até a família que construímos juntos.</p>
+
+<p><strong>Feliz Dia dos Namorados ❤️</strong></p>
+
+<p>Ferreira</p>
 </div>
 </div>
 
-<!-- FINAL BLACK STORIES -->
 <div class="story" style="background:#000">
-<div class="overlay"><h1>I don’t want to miss a thing.</h1></div>
+<div class="overlay">
+<h1>I Don't Want To Miss A Thing</h1>
+</div>
 </div>
 
 <div class="story" style="background:#000">
-<div class="overlay"><h1>Nem um segundo.</h1></div>
+<div class="overlay">
+<h1>Eu não quero perder um único segundo dessa história.</h1>
+</div>
 </div>
 
 <div class="story" style="background:#000">
-<div class="overlay"><h1>Nem um sorriso.</h1></div>
+<div class="overlay">
+<h1>Nem um único sorriso.</h1>
+</div>
 </div>
 
 <div class="story" style="background:#000">
-<div class="overlay"><h1>Nem um abraço.</h1></div>
+<div class="overlay">
+<h1>Nem um único abraço.</h1>
+</div>
 </div>
 
 <div class="story" style="background:#000">
-<div class="overlay"><h1>Porque nossa história é tudo.</h1></div>
+<div class="overlay">
+<h1>Nem um único desafio que enfrentamos juntos.</h1>
+</div>
+</div>
+
+<div class="story" style="background-image:url('final.jpeg')">
+<div class="overlay">
+<h1>Porque a melhor história da minha vida é a nossa. ❤️</h1>
+<p>Você.</p>
+<p>Eu.</p>
+<p>E o nosso pequeno Théo.</p>
+</div>
 </div>
 
 <script>
-const music = document.getElementById("music");
-const startBtn = document.getElementById("startBtn");
-const startScreen = document.getElementById("startScreen");
+const stories = document.querySelectorAll('.story');
+const bar = document.getElementById('bar');
+const music = document.getElementById('music');
 
-const stories = document.querySelectorAll(".story");
-const bar = document.getElementById("bar");
+let current=0;
 
-let current = 0;
-let timer = null;
-let isHolding = false;
+document.body.addEventListener('click',()=>{
+music.play();
+},{once:true});
 
-const TIME = 8000;
+function showStory(index){
 
-/* =========================
-   SHOW STORY
-========================= */
-function showStory(i){
-stories.forEach(s => s.classList.remove("active"));
-stories[i].classList.add("active");
+stories.forEach(s=>s.classList.remove('active'));
 
-/* reset progress */
-bar.style.transition = "none";
-bar.style.width = "0%";
+stories[index].classList.add('active');
 
-/* start progress */
+bar.style.transition='none';
+bar.style.width='0';
+
 setTimeout(()=>{
-bar.style.transition = `width ${TIME}ms linear`;
-bar.style.width = "100%";
+bar.style.transition='width 8s linear';
+bar.style.width='100%';
 },50);
+
 }
 
-/* =========================
-   NEXT / PREV
-========================= */
 function nextStory(){
-if(current < stories.length - 1){
+
 current++;
+
+if(current>=stories.length){
+current=stories.length-1;
+return;
+}
+
 showStory(current);
-startAuto();
-}
-}
 
-function prevStory(){
-if(current > 0){
-current--;
-showStory(current);
-startAuto();
-}
 }
 
-/* =========================
-   AUTO PLAY
-========================= */
-function startAuto(){
-clearTimeout(timer);
+showStory(0);
 
-timer = setTimeout(()=>{
-if(!isHolding) nextStory();
-}, TIME);
-}
+setInterval(nextStory,8000);
 
-/* =========================
-   START EXPERIENCE
-========================= */
-function startExperience(){
-
-startScreen.style.display = "none";
-
-current = 0;
-showStory(current);
-startAuto();
-
-/* áudio */
-music.play().catch(()=>{});
-}
-
-/* botão start */
-startBtn.addEventListener("click", (e)=>{
-e.preventDefault();
-e.stopPropagation();
-startExperience();
-});
-
-/* =========================
-   TAP AREA (like Instagram)
-========================= */
-document.addEventListener("click",(e)=>{
-
-if(startScreen.style.display !== "none") return;
-
-const x = e.clientX;
-const screenWidth = window.innerWidth;
-
-/* lado esquerdo = volta */
-if(x < screenWidth / 2){
-prevStory();
-}else{
-nextStory();
-}
-
-});
-
-/* =========================
-   SWIPE (MOBILE REAL)
-========================= */
-let startX = 0;
-let endX = 0;
-
-document.addEventListener("touchstart",(e)=>{
-startX = e.touches[0].clientX;
-isHolding = true;
-});
-
-document.addEventListener("touchend",(e)=>{
-endX = e.changedTouches[0].clientX;
-isHolding = false;
-
-if(startScreen.style.display !== "none") return;
-
-const diff = startX - endX;
-
-/* swipe forte */
-if(Math.abs(diff) > 50){
-if(diff > 0){
-nextStory();
-}else{
-prevStory();
-}
-}else{
-/* toque simples */
-const x = startX;
-const screenWidth = window.innerWidth;
-
-if(x < screenWidth / 2){
-prevStory();
-}else{
-nextStory();
-}
-}
-});
-
-/* =========================
-   HOLD PAUSE (like Instagram)
-========================= */
-document.addEventListener("mousedown",()=>isHolding=true);
-document.addEventListener("mouseup",()=>isHolding=false);
-document.addEventListener("touchcancel",()=>isHolding=false);
-
-/* =========================
-   CONTADOR
-========================= */
 const inicio = new Date("2013-03-25");
 
 function atualizar(){
-const hoje = new Date();
-const dias = Math.floor((hoje - inicio)/(1000*60*60*24));
 
-document.getElementById("contador").innerText =
-`❤️ Juntos há ${dias} dias`;
+const hoje = new Date();
+
+const dias = Math.floor((hoje-inicio)/(1000*60*60*24));
+
+document.getElementById("contador").innerHTML =
+"❤️ Juntos há " + dias + " dias";
+
 }
 
 atualizar();
