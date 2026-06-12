@@ -261,16 +261,33 @@ const stories = document.querySelectorAll('.story');
 const bar = document.getElementById('bar');
 const music = document.getElementById('music');
 
-let current=0;
+let current = 0;
+let started = false;
 
-document.body.addEventListener('click',()=>{
-music.play();
-},{once:true});
+/* =========================
+   START AUDIO + STORY
+========================= */
+function startExperience(){
+if(started) return;
+started = true;
 
+music.play().catch(e=>{
+console.log("Áudio bloqueado:", e);
+});
+
+showStory(0);
+}
+
+/* clique inicial (libera áudio + inicia tudo) */
+document.body.addEventListener('click', startExperience, {once:true});
+document.body.addEventListener('touchstart', startExperience, {once:true});
+
+/* =========================
+   STORIES
+========================= */
 function showStory(index){
 
 stories.forEach(s=>s.classList.remove('active'));
-
 stories[index].classList.add('active');
 
 bar.style.transition='none';
@@ -280,7 +297,6 @@ setTimeout(()=>{
 bar.style.transition='width 8s linear';
 bar.style.width='100%';
 },50);
-
 }
 
 function nextStory(){
@@ -293,29 +309,32 @@ return;
 }
 
 showStory(current);
-
 }
 
+/* =========================
+   AUTO PLAY
+========================= */
 showStory(0);
 
-setInterval(nextStory,8000);
+setInterval(()=>{
+if(started) nextStory();
+},8000);
 
+/* =========================
+   CONTADOR
+========================= */
 const inicio = new Date("2013-03-25");
 
 function atualizar(){
-
 const hoje = new Date();
-
 const dias = Math.floor((hoje-inicio)/(1000*60*60*24));
 
 document.getElementById("contador").innerHTML =
 "❤️ Juntos há " + dias + " dias";
-
 }
 
 atualizar();
 setInterval(atualizar,60000);
 </script>
-
 </body>
 </html>
