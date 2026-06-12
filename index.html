@@ -264,10 +264,14 @@ to{opacity:1}
 </div>
 
 <script>
-const stories = document.querySelectorAll('.story');
-const bar = document.getElementById('bar');
-const music = document.getElementById('music');
+const music = document.getElementById("music");
+const startBtn = document.getElementById("startBtn");
+const startScreen = document.getElementById("startScreen");
 
+startBtn.addEventListener("click", () => {
+    music.play();
+    startScreen.style.display = "none";
+});
 let current=0;
 
 document.body.addEventListener('click',()=>{
