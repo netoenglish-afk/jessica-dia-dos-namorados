@@ -219,109 +219,154 @@ const stories = document.querySelectorAll(".story");
 const bar = document.getElementById("bar");
 
 let current = 0;
-let timer;
-let isPaused = false;
+let timer = null;
+let isHolding = false;
 
 const TIME = 8000;
 
-/* MOSTRAR STORY */
+/* =========================
+   SHOW STORY
+========================= */
 function showStory(i){
 stories.forEach(s => s.classList.remove("active"));
 stories[i].classList.add("active");
 
+/* reset progress */
 bar.style.transition = "none";
 bar.style.width = "0%";
 
+/* start progress */
 setTimeout(()=>{
 bar.style.transition = `width ${TIME}ms linear`;
 bar.style.width = "100%";
 },50);
 }
 
-/* NEXT */
+/* =========================
+   NEXT / PREV
+========================= */
 function nextStory(){
 if(current < stories.length - 1){
 current++;
 showStory(current);
-startTimer();
+startAuto();
 }
 }
 
-/* PREV */
 function prevStory(){
 if(current > 0){
 current--;
 showStory(current);
-startTimer();
+startAuto();
 }
 }
 
-/* TIMER */
-function startTimer(){
+/* =========================
+   AUTO PLAY
+========================= */
+function startAuto(){
 clearTimeout(timer);
 
 timer = setTimeout(()=>{
-if(!isPaused) nextStory();
+if(!isHolding) nextStory();
 }, TIME);
 }
 
-/* START BUTTON */
-startBtn.addEventListener("click", async (e)=>{
-
-e.stopPropagation(); // 🔥 IMPORTANTE (evita conflito com click global)
-
-try{
-await music.play();
-}catch(e){
-console.log("Áudio bloqueado:", e);
-}
+/* =========================
+   START EXPERIENCE
+========================= */
+function startExperience(){
 
 startScreen.style.display = "none";
 
 current = 0;
 showStory(current);
-startTimer(); // 🔥 AGORA INICIA DE VERDADE
+startAuto();
+
+/* áudio */
+music.play().catch(()=>{});
+}
+
+/* botão start */
+startBtn.addEventListener("click", (e)=>{
+e.preventDefault();
+e.stopPropagation();
+startExperience();
 });
 
-/* CLICK (somente depois de iniciar) */
-document.body.addEventListener("click", ()=>{
-if(startScreen.style.display !== "none") return;
-nextStory();
-});
-
-/* SWIPE */
-let startX = 0;
-
-document.body.addEventListener("touchstart",(e)=>{
-startX = e.touches[0].clientX;
-isPaused = true;
-});
-
-document.body.addEventListener("touchend",(e)=>{
-let endX = e.changedTouches[0].clientX;
-let diff = startX - endX;
-
-isPaused = false;
+/* =========================
+   TAP AREA (like Instagram)
+========================= */
+document.addEventListener("click",(e)=>{
 
 if(startScreen.style.display !== "none") return;
 
-if(Math.abs(diff) > 50){
-diff > 0 ? nextStory() : prevStory();
+const x = e.clientX;
+const screenWidth = window.innerWidth;
+
+/* lado esquerdo = volta */
+if(x < screenWidth / 2){
+prevStory();
 }else{
 nextStory();
 }
+
 });
 
-/* PAUSE PC */
-document.body.addEventListener("mousedown",()=>isPaused=true);
-document.body.addEventListener("mouseup",()=>isPaused=false);
+/* =========================
+   SWIPE (MOBILE REAL)
+========================= */
+let startX = 0;
+let endX = 0;
 
-/* CONTADOR */
+document.addEventListener("touchstart",(e)=>{
+startX = e.touches[0].clientX;
+isHolding = true;
+});
+
+document.addEventListener("touchend",(e)=>{
+endX = e.changedTouches[0].clientX;
+isHolding = false;
+
+if(startScreen.style.display !== "none") return;
+
+const diff = startX - endX;
+
+/* swipe forte */
+if(Math.abs(diff) > 50){
+if(diff > 0){
+nextStory();
+}else{
+prevStory();
+}
+}else{
+/* toque simples */
+const x = startX;
+const screenWidth = window.innerWidth;
+
+if(x < screenWidth / 2){
+prevStory();
+}else{
+nextStory();
+}
+}
+});
+
+/* =========================
+   HOLD PAUSE (like Instagram)
+========================= */
+document.addEventListener("mousedown",()=>isHolding=true);
+document.addEventListener("mouseup",()=>isHolding=false);
+document.addEventListener("touchcancel",()=>isHolding=false);
+
+/* =========================
+   CONTADOR
+========================= */
 const inicio = new Date("2013-03-25");
 
 function atualizar(){
 const hoje = new Date();
-const dias = Math.floor((hoje-inicio)/(1000*60*60*24));
+const dias = Math.floor((hoje - inicio)/(1000*60*60*24));
 
 document.getElementById("contador").innerText =
 `❤️ Juntos há ${dias} dias`;
