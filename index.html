@@ -224,7 +224,7 @@ let isPaused = false;
 
 const TIME = 8000;
 
-/* SHOW STORY */
+/* MOSTRAR STORY */
 function showStory(i){
 stories.forEach(s => s.classList.remove("active"));
 stories[i].classList.add("active");
@@ -259,25 +259,35 @@ startTimer();
 /* TIMER */
 function startTimer(){
 clearTimeout(timer);
+
 timer = setTimeout(()=>{
 if(!isPaused) nextStory();
 }, TIME);
 }
 
-/* START */
-startBtn.addEventListener("click", async ()=>{
+/* START BUTTON */
+startBtn.addEventListener("click", async (e)=>{
 
-try{ await music.play(); }catch(e){}
+e.stopPropagation(); // 🔥 IMPORTANTE (evita conflito com click global)
+
+try{
+await music.play();
+}catch(e){
+console.log("Áudio bloqueado:", e);
+}
 
 startScreen.style.display = "none";
 
 current = 0;
 showStory(current);
-startTimer();
+startTimer(); // 🔥 AGORA INICIA DE VERDADE
 });
 
-/* CLICK */
-document.body.addEventListener("click", ()=> nextStory());
+/* CLICK (somente depois de iniciar) */
+document.body.addEventListener("click", ()=>{
+if(startScreen.style.display !== "none") return;
+nextStory();
+});
 
 /* SWIPE */
 let startX = 0;
@@ -292,6 +302,8 @@ let endX = e.changedTouches[0].clientX;
 let diff = startX - endX;
 
 isPaused = false;
+
+if(startScreen.style.display !== "none") return;
 
 if(Math.abs(diff) > 50){
 diff > 0 ? nextStory() : prevStory();
