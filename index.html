@@ -45,7 +45,6 @@ color:#fff;
     
 .story{
 transition:opacity .6s ease;
-}
 position:absolute;
 top:0;
 left:0;
@@ -326,7 +325,8 @@ startBtn.addEventListener("click", async () => {
     }
 
     startScreen.style.display = "none";
-
+    
+showStory(0); // 🔥 ESSENCIAL
 
 });
 let current=0;
