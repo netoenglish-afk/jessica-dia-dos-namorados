@@ -44,6 +44,8 @@ color:#fff;
 }
     
 .story{
+transition:opacity .6s ease;
+}
 position:absolute;
 top:0;
 left:0;
@@ -225,7 +227,7 @@ to{opacity:1}
 </div>
 </div>
 
-<div class="story" style="background-image:url('Foto familia.HEIC')">
+<div class="story" style="background-image:url('familia.jpg')">
 <div class="overlay">
 <h2>Nossa Maior Vitória</h2>
 <p>Hoje olhamos para o Théo correndo.</p>
@@ -325,9 +327,6 @@ startBtn.addEventListener("click", async () => {
 
     startScreen.style.display = "none";
 
-    showStory(0);
-
-    setInterval(nextStory,8000);
 
 });
 let current=0;
